@@ -11,19 +11,60 @@
 START hilow_game
 
     # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    OUTPUT "Enter the lower bound:"
+    INPUT lower_bound
+
+    OUTPUT "Enter the upper bound:"
+    INPUT upper_bound
+
+    WHILE lower_bound >= upper_bound
+        OUTPUT "Invalid range. The lower bound must be less than the upper bound."
+
+        OUTPUT "Enter the lower bound:"
+        INPUT lower_bound
+
+        OUTPUT "Enter the upper bound:"
+        INPUT upper_bound
+    END WHILE
 
     # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    SET secret_number = random number between lower_bound and upper_bound
 
-    # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+# Play the game.
+OUTPUT "Guess a number between " + lower_bound + " and " + upper_bound + ":"
+INPUT guess
+
+WHILE guess < lower_bound OR guess > upper_bound
+    OUTPUT "Invalid guess. Enter a number between the lower and upper bounds:"
+    INPUT guess
+END WHILE
+
+WHILE guess != secret_number
+
+    IF guess < secret_number
+        OUTPUT "Your guess is too low."
+
+    ELSE IF guess > secret_number
+        OUTPUT "Your guess is too high."
+
+    ELSE
+        OUTPUT "Congratulations! You guessed the correct number!"
+    END IF
+
+    IF guess != secret_number
+        OUTPUT "Enter another guess:"
+        INPUT guess
+
+        WHILE guess < lower_bound OR guess > upper_bound
+            OUTPUT "Invalid guess. Enter a number between the lower and upper bounds:"
+            INPUT guess
+        END WHILE
+    END IF
+
+END WHILE
+
+OUTPUT "Congratulations! You guessed the correct number!"
 
 END hilow_game
 
-# === References ===
-# TODO: Add references for sources you used, or delete this line if unused.
+
